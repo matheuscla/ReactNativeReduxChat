@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
+import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 export default props => (
   <View style={styles.container}>
@@ -9,7 +10,9 @@ export default props => (
     <View style={styles.form}>
       <TextInput style={styles.textInput} placeholder="E-mail" />
       <TextInput style={styles.textInput} placeholder="Password" />
-      <Text style={styles.registerText} >Aren't registered? Sign up</Text>
+      <TouchableHighlight onPress={ () => Actions.formRegister() }>
+        <Text style={styles.registerText} >Aren't registered? Sign up</Text>
+      </TouchableHighlight>
     </View>
     <View style={styles.actions}>
       <Button title="Sign In" color="#115e54" onPress={() => false}/>
