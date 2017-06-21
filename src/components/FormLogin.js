@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
-export default props => (
+const formLogin = props => (
   <View style={styles.container}>
     <View style={styles.header}>
       <Text style={styles.headerText}>ReactNativeReduxChat</Text>
     </View>
     <View style={styles.form}>
-      <TextInput style={styles.textInput} placeholder="E-mail" />
-      <TextInput style={styles.textInput} placeholder="Password" />
+      <TextInput value={props.email} style={styles.textInput} placeholder="E-mail" />
+      <TextInput value={props.password} style={styles.textInput} placeholder="Password" />
       <TouchableHighlight onPress={ () => Actions.formRegister() }>
         <Text style={styles.registerText} >Aren't registered? Sign up</Text>
       </TouchableHighlight>
@@ -47,3 +48,12 @@ const styles = StyleSheet.create({
     flex: 2
   }
 })
+
+const mapStateToProps = state => (
+  {
+    email: state.AuthReducer.email,
+    password: state.AuthReducer.password
+  }
+)
+
+export default connect(mapStateToProps, null)(formLogin);

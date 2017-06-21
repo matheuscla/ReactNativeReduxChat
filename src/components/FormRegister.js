@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 
-export default props => (
+const formRegister = props => (
   <View style={styles.form}>
     <View style={styles.formInput}>
-      <TextInput style={styles.inputs} placeholder="Name" />
-      <TextInput style={styles.inputs} placeholder="Email" />
-      <TextInput style={styles.inputs} placeholder="Password" />
+      <TextInput value={props.name} style={styles.inputs} placeholder="Name" />
+      <TextInput value={props.email} style={styles.inputs} placeholder="Email" />
+      <TextInput value={props.password} style={styles.inputs} placeholder="Password" />
     </View>
     <View style={styles.formAction}>
       <Button title="Register" color="#115e54" onPress={() => false} />
@@ -31,3 +32,13 @@ const styles = StyleSheet.create({
     flex: 1
   }
 })
+
+const mapStateToProps = state => (
+  {
+    name: state.AuthReducer.name,
+    email: state.AuthReducer.email,
+    password: state.AuthReducer.password
+  }
+)
+
+export default connect(mapStateToProps, null)(formRegister)
