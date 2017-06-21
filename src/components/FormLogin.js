@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { changeEmail, changePassword } from './../actions/AuthActions';
 
 const formLogin = props => (
   <View style={styles.container}>
@@ -9,8 +10,8 @@ const formLogin = props => (
       <Text style={styles.headerText}>ReactNativeReduxChat</Text>
     </View>
     <View style={styles.form}>
-      <TextInput value={props.email} style={styles.textInput} placeholder="E-mail" />
-      <TextInput value={props.password} style={styles.textInput} placeholder="Password" />
+      <TextInput value={props.email} style={styles.textInput} placeholder="E-mail" onChangeText={ text => props.changeEmail(text)} />
+      <TextInput secureTextEntry value={props.password} style={styles.textInput} placeholder="Password" onChangeText={ text => props.changePassword(text) } />
       <TouchableHighlight onPress={ () => Actions.formRegister() }>
         <Text style={styles.registerText} >Aren't registered? Sign up</Text>
       </TouchableHighlight>
@@ -56,4 +57,4 @@ const mapStateToProps = state => (
   }
 )
 
-export default connect(mapStateToProps, null)(formLogin);
+export default connect(mapStateToProps, { changeEmail, changePassword })(formLogin);
